@@ -225,6 +225,16 @@ class TeacherRegistry extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTeacherStatusAudits()
+    {
+        return $this->hasMany(TeacherStatusAudit::className(), ['teacher_id' => 'id'])
+            ->via('teachers')
+            ->orderBy([TeacherStatusAudit::tableName() . '.[[audit_ts]]' => SORT_DESC]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSpecialisations()
     {
         return $this->hasMany(Specialisation::className(), ['id' => 'specialisation_id'])

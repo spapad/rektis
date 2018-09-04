@@ -72,6 +72,15 @@ class TeacherStatusAudit extends \yii\db\ActiveRecord
         return $this->hasOne(Teacher::className(), ['id' => 'teacher_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacherRegistry()
+    {
+        return $this->hasOne(TeacherRegistry::className(), ['id' => 'registry_id'])
+            ->via('teacher');
+    }
+
     /** 
      * Record teacher status change or audit everything...
      * 

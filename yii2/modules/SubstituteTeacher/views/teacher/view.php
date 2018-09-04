@@ -2,6 +2,9 @@
 
 use yii\bootstrap\Html;
 use yii\widgets\DetailView;
+use yii\data\ArrayDataProvider;
+use yii\grid\GridView;
+use yii\helpers\Json;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\SubstituteTeacher\models\Teacher */
@@ -31,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
-                'registry.name',
+                [
+                    'attribute' => 'registry.name',
+                    'label' => Yii::t('substituteteacher', 'Fullname'),
+                    'value' => function ($m) {
+                        return Html::a(Html::icon('user'), ['teacher-registry/view', 'id' => $m->registry_id], ['class' => 'btn btn-xs btn-default', 'title' => Yii::t('substituteteacher', 'View teacher registry entry')]) 
+                        . " {$m->name}";
+                    },
+                    'format' => 'html'
+                ],
                 'year',
                 [
                     'attribute' => '',
@@ -75,4 +86,37 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
+        <h2><?= Yii::t('substituteteacher', 'Teacher status audits') ?></h2>
+        <?php if (empty($model->teacherStatusAudits)) : ?>
+        <p class="text-info"><?= Yii::t('substituteteacher', 'No status audits') ?></p>
+        <?php else : ?>
+        <?php $dataProvider = new ArrayDataProvider(['allModels' => $model->teacherStatusAudits]); ?>
+        <div class="teacher-status-audtis-index">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => null,
+                'columns' => [
+                    'id',
+                    'status',
+                    'audit_ts',
+                    'actor',
+                    'audit',
+                    [
+                        'attribute' => 'data',
+                        'value' => function ($model) {
+                            return empty($model->data) ? null : "<pre>" . Json::encode($model->data_parsed, JSON_PRETTY_PRINT) . "</pre>";
+                        },
+                        'format' => 'html'
+                    ],
+
+                    // [
+                    //     'class' => FilterActionColumn::className(),
+                    //     'filter' => FilterActionColumn::LINK_INDEX_CONFIRM,
+                    //     'template' => '{update} {delete}',
+                    //     'visible' => \Yii::$app->user->can('admin')
+                    // ],
+                ],
+            ]); ?>
+        </div>
+        <?php endif; ?>
     </div>

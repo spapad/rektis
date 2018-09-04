@@ -142,7 +142,8 @@ class Teacher extends \yii\db\ActiveRecord
      */
     public function getTeacherStatusAudits()
     {
-        return $this->hasMany(TeacherStatusAudit::className(), ['teacher_id' => 'id']);
+        return $this->hasMany(TeacherStatusAudit::className(), ['teacher_id' => 'id'])
+            ->orderBy([TeacherStatusAudit::tableName() . '.[[audit_ts]]' => SORT_DESC]);
     }
 
     /**
