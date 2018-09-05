@@ -53,8 +53,7 @@ class Operation extends \yii\db\ActiveRecord
                 ]
             ],
             [['created_at', 'updated_at'], 'safe'],
-            [['title', 'logo', 'contract_template', 'summary_template', 'export_template', 'decision_template'], 'string', 'max' => 500],
-            [['description'], 'string', 'max' => 90],
+            [['title', 'logo', 'contract_template', 'summary_template', 'export_template', 'decision_template', 'description'], 'string', 'max' => 500],
         ];
     }
 
