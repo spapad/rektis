@@ -131,7 +131,7 @@ AppAsset::register($this);
 
                         '<li class="divider"></li>',
                         '<li class="dropdown-header"><i class="glyphicon glyphicon-sunglasses"></i> Αδειών</li>',
-                        [    
+                        [
                             'label' => 'Είδη αδειών',
                             'url' => ['/leave-type'],
                             'visible' => Yii::$app->user->can('leave_user')
@@ -218,7 +218,7 @@ AppAsset::register($this);
 
                 [
                     'label' => 'Αναπληρωτές',
-                    'visible' => Yii::$app->user->can('spedu_user'), 
+                    'visible' => Yii::$app->user->can('spedu_user'),
                     'items' => [
                         '<li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> Αρχεία δεδομένων</li>',
                         [
@@ -368,6 +368,10 @@ AppAsset::register($this);
                         [
                             'label' => 'Αρχειοθετημένες Εγκρίσεις Μετακινήσεων',
                             'url' => ['/schooltransport/schtransport-transport/index?archived=1'],
+                        ],
+                        [
+                            'label' => 'Προγράμματα Μετακινήσεων',
+                            'url' => ['/schooltransport/schtransport-program'],
                         ],
                         [
                             'label' => 'Στατιστικά',

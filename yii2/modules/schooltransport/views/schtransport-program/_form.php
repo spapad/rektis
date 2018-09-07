@@ -8,20 +8,16 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="schtransport-program-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'program_title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'program_code')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'programcategory_id')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
+<div class="schtransport-program-form col-lg-8">
+        <?php $form = ActiveForm::begin(); ?>
+    
+        <?= $form->field($model, 'program_title')->textInput(['maxlength' => true]) ?>
+    
+        <?= $form->field($model, 'program_code')->textInput(['maxlength' => true]) ?>
+    
+        <div class="form-group pull-right">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
+    
+        <?php ActiveForm::end(); ?>
 </div>

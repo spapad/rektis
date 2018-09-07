@@ -1,16 +1,15 @@
 <?php
 
+use app\modules\schooltransport\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\schooltransport\models\SchtransportProgram */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Schtransport Program',
-]) . $model->program_id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Schtransport Programs'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->program_id, 'url' => ['view', 'id' => $model->program_id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Module::t('modules/schooltransport/app', 'School Transportations'), 'url' => ['/schooltransport/default']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('modules/schooltransport/app', 'Programs'), 'url' => ['/schooltransport/schtransport-program']];
+$this->title = Module::t('modules/schooltransport/app', 'Update program details');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schtransport-program-update">
 

@@ -91,7 +91,7 @@ return [
     'Download digitally signed file' => 'Κατεβάστε το ψηφιακά υπογεγραμμένο αρχείο',
     'Digitally Signed File' => 'Ψηφιακά Υπογεγραμμένο Αρχείο',
     'Help' => 'Βοήθεια',
-    'Help regarding the application of the school transportations, the process of creating a school transportation approval as well as the related legislation.' => 
+    'Help regarding the application of the school transportations, the process of creating a school transportation approval as well as the related legislation.' =>
     'Βοήθεια σχετικά με τη χρήση της εφαρμογής των σχολικών μετακινήσεων, τη διαδικασία δημιουργίας έγκρισης μετακίνησης, καθώς και τη σχετική νομοθεσία.',
     'Error in downloading file.' => 'Σφάλμα στη λήψη του αρχείου.',
     'City' => 'Πόλη',
@@ -146,5 +146,14 @@ return [
     'Current school year' => 'Τρέχοντος σχολικού έτους',
     'Previous school year' => 'Προηγούμενου σχολικού έτους',
     'All years' => 'Συνολικά όλων των ετών',
-    'The are no school transportations to show statistics.' => 'Δεν υπάρχουν σχολικές μετακινήσεις για να προβληθούν στατιστικά.'
+    'The are no school transportations to show statistics.' => 'Δεν υπάρχουν σχολικές μετακινήσεις για να προβληθούν στατιστικά.',
+    'The transportation cannot be saved because the program code has been already assigned to a different program category than that you have selected.' => 'Η μετακίνηση δεν μπορεί να αποθηκευθεί γιατί ο κωδικός προγράμματος είναι ήδη συνδεδεμένος με άλλη κατηγορία προγράμματος από αυτή που έχετε επιλέξει.',
+    'View/edit programs' => 'Προβολή/επεξεργασία προγραμμάτων',
+    'Programs' => 'Προγράμματα',
+    'Program Category' => 'Κατηγορία Προγράμματος',
+    'The program was deleted successfully' => 'Το πρόγραμμα διαγράφηκε επιτυχώς.',
+    'The update of the program failed.' => 'Η ενημέρωση του προγράμματος απέτυχε.',
+    'The program details were updated successfully.' => 'Οι λεπτομέρειες του προγράμματος ενημερώθηκαν επιτυχώς.',
+    'The update of the program details failed.' => 'Η ενημέρωση των στοιχείων του προγράμματος απέτυχε.',
+    'Update program details' => 'Ενημέρωση στοιχείων προγράμματος'
 ];

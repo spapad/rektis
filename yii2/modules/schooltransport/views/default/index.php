@@ -24,12 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p><?= Html::a(Module::t('modules/schooltransport/app', 'School Units'), Url::to(['/schooltransport/schoolunit/']), ['class' => 'btn btn-primary', 'data-method' => 'post']) ?></p>
         </div>
         <div class="col-lg-4">
+            <h3><?= Module::t('modules/schooltransport/app', 'Programs');?></h3>
+            <p><?= Module::t('modules/schooltransport/app', 'View/edit programs');?></p>
+			<p><?= Html::a(Module::t('modules/schooltransport/app', 'Programs'), Url::to(['/schooltransport/schtransport-program']), ['class' => 'btn btn-primary', 'data-method' => 'post']) ?></p>
+        </div>        
+    </div>
+    <div class="row">
+            <div class="col-lg-4">
             <h3><?= Module::t('modules/schooltransport/app', 'Transportation Approval States');?></h3>
             <p><?= Module::t('modules/schooltransport/app', 'View/edit states of a transportation approval');?></p>
 			<p><?= Html::a(Module::t('modules/schooltransport/app', 'Transportation Approval States'), Url::to(['/schooltransport/schtransport-state']), ['class' => 'btn btn-primary', 'data-method' => 'post']) ?></p>
         </div>        
-    </div>
-    <div class="row">
 		<div class="col-lg-4">
             <h3><?= Module::t('modules/schooltransport/app', 'Help');?></h3>
 			<p><?= Module::t('modules/schooltransport/app', 'Help regarding the application of the school transportations, the process of creating a school transportation approval as well as the related legislation.');?></p>

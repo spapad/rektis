@@ -2,6 +2,7 @@
 
 namespace app\modules\schooltransport\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -10,6 +11,7 @@ use yii\data\ActiveDataProvider;
  */
 class SchtransportProgramSearch extends SchtransportProgram
 {
+    public $programcategory_programalias;
     /**
      * @inheritdoc
      */
@@ -17,7 +19,7 @@ class SchtransportProgramSearch extends SchtransportProgram
     {
         return [
             [['program_id', 'programcategory_id'], 'integer'],
-            [['program_title', 'program_code'], 'safe'],
+            [['program_title', 'program_code', 'programcategory_programalias'], 'safe'],
         ];
     }
 
@@ -39,12 +41,18 @@ class SchtransportProgramSearch extends SchtransportProgram
      */
     public function search($params)
     {
-        $query = SchtransportProgram::find();
-
-        // add conditions that should always apply here
+        $tblprefix = Yii::$app->db->tablePrefix;
+        $transport_programcategs = $tblprefix . 'schtransport_programcategory';
+        $transport_programs = $tblprefix . 'schtransport_program';
+        $query = (new \yii\db\Query())
+            ->select($transport_programcategs . '.*,' . $transport_programs . '.*')
+            ->from($transport_programcategs . ',' . $transport_programs)
+            ->where($transport_programcategs . '.programcategory_id=' . $transport_programs . '.programcategory_id');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [ 'attributes' => ['program_code', 'program_title', 'programcategory_programalias'],
+                'defaultOrder' => ['programcategory_programalias'=>SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -62,7 +70,8 @@ class SchtransportProgramSearch extends SchtransportProgram
         ]);
 
         $query->andFilterWhere(['like', 'program_title', $this->program_title])
-            ->andFilterWhere(['like', 'program_code', $this->program_code]);
+            ->andFilterWhere(['like', 'program_code', $this->program_code])
+            ->andFilterWhere(['like', 'programcategory_programalias', $this->programcategory_programalias]);
 
         return $dataProvider;
     }

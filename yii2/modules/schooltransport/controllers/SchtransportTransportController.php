@@ -106,6 +106,7 @@ class SchtransportTransportController extends Controller
         $program_alias = SchtransportProgramcategory::getAlias($id);
         $program_title = SchtransportProgramcategory::getTitle($id);
         $model = new SchtransportTransport();
+        $model->transport_dateprotocolcompleted = date('Y-m-d');
         $tblprogram = Yii::$app->db->tablePrefix . 'schtransport_program';
         $tblmeeting = Yii::$app->db->tablePrefix . 'schtransport_meeting';
         $schools = [];
@@ -145,11 +146,14 @@ class SchtransportTransportController extends Controller
 
                 $existing_program = SchtransportProgram::findOne(['program_code' => $program_model->program_code]);
                 $program_exists = !(count($existing_program) == 0);
+                if ($program_exists && $existing_program->programcategory_id != $id) {
+                    throw new Exception("The transportation cannot be saved because the program code has been already assigned to a different program category than that you have selected.");
+                }
                 if ($program_exists) {
                     $program_model->program_id = $existing_program->program_id;
                 } else {
                     if (!$program_model->save()) {
-                        throw new Exception("Failure in creating the transportation1");
+                        throw new Exception("Failure in creating the transportation");
                     }
                 }
 
@@ -486,7 +490,7 @@ class SchtransportTransportController extends Controller
         $templateProcessor->setValue('fax', $this->module->params['schooltransport_fax']);
         $templateProcessor->setValue('email', Yii::$app->params['email']);
         $templateProcessor->setValue('webaddress', Yii::$app->params['web_address']);
-        $templateProcessor->setValue('date', date('d/m/Y'));
+        $templateProcessor->setValue('date', date_format(date_create($transport_model['transport_dateprotocolcompleted']), 'd-m-Y'));
         $templateProcessor->setValue('protocol', $transport_model['transport_pde_protocol']);
         $templateProcessor->setValue('school', $school_model->school_name);
         $templateProcessor->setValue('teachers', $transport_model['transport_teachers']);
@@ -697,7 +701,7 @@ class SchtransportTransportController extends Controller
      * @return mixed
      */
     public function actionBackwardstate($id)
-    {
+    {//echo $id; die();
         try {
             $transaction = Yii::$app->db->beginTransaction();
             $transport_model = $this->findModel($id);
@@ -720,7 +724,7 @@ class SchtransportTransportController extends Controller
                 }
             }
 
-            if (!SchtransportTransportstate::findOne(['state_id' => $states_count])->delete()) {
+            if (!SchtransportTransportstate::findOne(['state_id' => $states_count, 'transport_id' => $id])->delete()) {
                 throw new Exception("Failed to backward transport state.");
             }
 
